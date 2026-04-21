@@ -6,7 +6,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
 
-		<!-- Client app related -->
+		<!-- Client app  -->
 		<TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
 		<DefaultItemExcludes>$(DefaultItemExcludes);$(SpaRoot)node_modules\**</DefaultItemExcludes>
 		<SpaRoot>ClientApp/</SpaRoot>
@@ -14,6 +14,9 @@
 		<SpaProxyServerUrl>http://localhost:8095</SpaProxyServerUrl>
 
 		<BuildServerSideRenderer>false</BuildServerSideRenderer>
+		
+		<!-- Target OS -->
+		<RuntimeIdentifier>linux-x64</RuntimeIdentifier>
 	</PropertyGroup>
 
 	<ItemGroup>
