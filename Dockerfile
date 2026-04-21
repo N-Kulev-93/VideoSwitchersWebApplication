@@ -10,7 +10,7 @@ COPY src/Application/Application.csproj Application/
 COPY src/Infrastructure/Infrastructure.csproj Infrastructure/
 RUN dotnet restore Api/Api.csproj
 WORKDIR /
-COPY . ./src
+COPY . .
 RUN dotnet build ./src/Api/Api.csproj -c Release -o /app/build --no-restore 
 
 ENV NODE_ENV=production
