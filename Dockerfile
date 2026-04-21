@@ -5,13 +5,13 @@ EXPOSE 8086
 
 FROM mcr.microsoft.com/dotnet/sdk:10.0-alpine3.23 AS build
 WORKDIR /src
-COPY src/Api/Api.csproj .
-COPY src/Application/Application.csproj .
-COPY src/Infrastructure/Infrastructure.csproj .
-RUN dotnet restore .
+COPY src/Api/Api.csproj Api/
+COPY src/Application/Application.csproj Application/
+COPY src/Infrastructure/Infrastructure.csproj Infrastructure/
+RUN dotnet restore Api/Api.csproj
 WORKDIR /
 COPY . ./src
-RUN dotnet build ./src/Api.csproj -c Release -o /app/build --no-restore 
+RUN dotnet build ./src/Api/Api.csproj -c Release -o /app/build --no-restore 
 
 ENV NODE_ENV=production
 FROM node:22.22.2-bookworm-slim AS clientbuild
@@ -21,7 +21,7 @@ RUN npm ci
 RUN npm run build
 
 FROM build AS publish
-RUN dotnet publish ./src/Api.csproj -c Release  -o /app/publish --no-restore \
+RUN dotnet publish ./src/Api/Api.csproj -c Release  -o /app/publish --no-restore \
 && rm -rf /app/publish/src
 COPY --from=clientbuild /app/client/dist /app/publish/wwwroot
 
