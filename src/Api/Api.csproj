@@ -16,7 +16,7 @@
 		<BuildServerSideRenderer>false</BuildServerSideRenderer>
 		
 		<!-- Target OS -->
-		<RuntimeIdentifier>linux-x64</RuntimeIdentifier>
+		<RuntimeIdentifiers>win-x64;linux-x64</RuntimeIdentifiers>
 	</PropertyGroup>
 
 	<ItemGroup>
