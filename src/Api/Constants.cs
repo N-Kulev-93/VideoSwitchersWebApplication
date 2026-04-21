@@ -1,4 +1,4 @@
-﻿namespace VideoSwitchers.Api
+﻿namespace Api
 {
     public static class Constants
     {

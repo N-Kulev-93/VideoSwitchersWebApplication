@@ -1,4 +1,4 @@
-using VideoSwitchers.Api;
+using Api;
 
 var builder = WebApplication.CreateBuilder(args);
 
