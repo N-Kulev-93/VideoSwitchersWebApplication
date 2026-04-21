@@ -6,7 +6,9 @@ EXPOSE 8086
 FROM mcr.microsoft.com/dotnet/sdk:10.0-alpine3.23 AS build
 WORKDIR /src
 COPY src/Api/Api.csproj .
-RUN dotnet restore Api.csproj
+COPY src/Application/Application.csproj .
+COPY src/Infrastructure/Infrastructure.csproj .
+RUN dotnet restore .
 WORKDIR /
 COPY . ./src
 RUN dotnet build ./src/Api.csproj -c Release -o /app/build --no-restore 

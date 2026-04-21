@@ -1,4 +1,4 @@
-﻿namespace Api
+﻿namespace VideoSwitchers.Api
 {
     public static class ServiceCollectionExtensions
     {
