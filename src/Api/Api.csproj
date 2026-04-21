@@ -42,11 +42,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="ClientApp\src\components\" />
-	  <Folder Include="ClientApp\styles\" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <ProjectReference Include="..\Application\Application.csproj" />
 	  <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
 	</ItemGroup>
