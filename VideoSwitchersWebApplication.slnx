@@ -8,4 +8,6 @@
     <File Path="README.md" />
   </Folder>
   <Project Path="src/Api/Api.csproj" />
+  <Project Path="src/Application/Application.csproj" Id="a8ba7f42-3829-4702-8b89-2a1740197b5a" />
+  <Project Path="src/Infrastructure/Infrastructure.csproj" Id="3c43941e-4430-4b73-b75c-65b6a146a84e" />
 </Solution>
