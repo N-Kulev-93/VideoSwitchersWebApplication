@@ -6,7 +6,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
 
-		<!-- Client app  -->
+		<!-- Client app related -->
 		<TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
 		<DefaultItemExcludes>$(DefaultItemExcludes);$(SpaRoot)node_modules\**</DefaultItemExcludes>
 		<SpaRoot>ClientApp/</SpaRoot>
@@ -14,9 +14,12 @@
 		<SpaProxyServerUrl>http://localhost:8095</SpaProxyServerUrl>
 
 		<BuildServerSideRenderer>false</BuildServerSideRenderer>
-		
-		<!-- Target OS -->
-		<RuntimeIdentifier>linux-x64</RuntimeIdentifier>
+
+		<RootNamespace>VideoSwitchers.Api</RootNamespace>
+
+		<AssemblyTitle>VideoSwitchers.Api</AssemblyTitle>
+
+		<AssemblyName>VideoSwitchers.Api</AssemblyName>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -48,7 +51,6 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\Application\Application.csproj" />
-	  <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
 	</ItemGroup>
 
 </Project>
