@@ -14,12 +14,6 @@
 		<SpaProxyServerUrl>http://localhost:8095</SpaProxyServerUrl>
 
 		<BuildServerSideRenderer>false</BuildServerSideRenderer>
-
-		<RootNamespace>VideoSwitchers.Api</RootNamespace>
-
-		<AssemblyTitle>VideoSwitchers.Api</AssemblyTitle>
-
-		<AssemblyName>VideoSwitchers.Api</AssemblyName>
 	</PropertyGroup>
 
 	<ItemGroup>
