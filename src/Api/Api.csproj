@@ -14,6 +14,12 @@
 		<SpaProxyServerUrl>http://localhost:8095</SpaProxyServerUrl>
 
 		<BuildServerSideRenderer>false</BuildServerSideRenderer>
+
+		<RootNamespace>VideoSwitchers.Api</RootNamespace>
+
+		<AssemblyTitle>VideoSwitchers.Api</AssemblyTitle>
+
+		<AssemblyName>VideoSwitchers.Api</AssemblyName>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -41,6 +47,10 @@
 	<ItemGroup>
 	  <Folder Include="ClientApp\src\components\" />
 	  <Folder Include="ClientApp\styles\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Application\Application.csproj" />
 	</ItemGroup>
 
 </Project>
