@@ -16,12 +16,16 @@
 		<BuildServerSideRenderer>false</BuildServerSideRenderer>
 		
 		<!-- Target OS -->
-		<RuntimeIdentifier>linux-x64</RuntimeIdentifier>
+		<RuntimeIdentifiers>linux-x64;win-x64</RuntimeIdentifiers>
 	</PropertyGroup>
 
 	<ItemGroup>
+		<Compile Remove="ClientApp\src\components\**" />
 		<Content Remove="$(SpaRoot)**" />
+		<Content Remove="ClientApp\src\components\**" />
+		<EmbeddedResource Remove="ClientApp\src\components\**" />
 		<None Remove="$(SpaRoot)**" />
+		<None Remove="ClientApp\src\components\**" />
 		<None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
 	</ItemGroup>
 
@@ -39,11 +43,6 @@
 		<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.5" />
 		<PackageReference Include="Microsoft.AspNetCore.SpaProxy" Version="10.0.5" />
 		<PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="10.1.7" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="ClientApp\src\components\" />
-	  <Folder Include="ClientApp\styles\" />
 	</ItemGroup>
 
 	<ItemGroup>
