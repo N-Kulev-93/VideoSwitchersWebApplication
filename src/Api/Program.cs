@@ -1,4 +1,5 @@
 using Api;
+using Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,12 +7,14 @@ builder.Services.AddControllers();
 
 // TODO: Complete OpenApi setup to be compliant with RFC 9457.
 builder.Services.AddOpenApi();
-builder.Services.AddApiServices();
+builder.Services
+    .AddApiServices()
+    .AddInfrastructureServices();
 
 var app = builder.Build();
 //TODO: Add logger middleware, non-sensitive data, limits, etc...
 if (app.Environment.IsDevelopment())
-{
+{   
     app.MapOpenApi(pattern: Constants.OpenApiDocumentRoute); 
     app.UseSwaggerUI(setupAction: (options) => options.SwaggerEndpoint(url: Constants.OpenApiDocumentRoute, name: Constants.OpenApiDocumentName));
 }

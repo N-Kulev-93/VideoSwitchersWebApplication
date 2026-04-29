@@ -19,7 +19,7 @@ const config: webpack.Configuration = {
         port: 8095,
         proxy: [
             {
-                context: ['/api'],
+                context: ['/api', '/swagger', '/openapi'],
                 target: 'http://localhost:8001',
             },
         ]
