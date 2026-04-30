@@ -7,6 +7,8 @@
     <File Path="LICENSE" />
     <File Path="README.md" />
   </Folder>
+  <Project Path="Application.Command/Application.Command.csproj" Id="6519b63e-7e77-4426-9b6d-f2bb48719cb6" />
+  <Project Path="Application.Query/Application.Query.csproj" Id="a009170b-1524-4db9-823d-8df95aee98bc" />
   <Project Path="src/Api/Api.csproj" />
   <Project Path="src/Application/Application.csproj" Id="a8ba7f42-3829-4702-8b89-2a1740197b5a" />
   <Project Path="src/Infrastructure/Infrastructure.csproj" Id="3c43941e-4430-4b73-b75c-65b6a146a84e" />

@@ -6,9 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\Application.Command\Application.Command.csproj" />
-    <ProjectReference Include="..\..\Application.Query\Application.Query.csproj" />
-  </ItemGroup>
-
 </Project>

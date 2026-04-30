@@ -1,10 +1,10 @@
 ﻿namespace Application.Command
 {
-    public class RenameOutputCommand
+    public class RenameInputCommand : ActionCommand
     {
-        public RenameOutputCommand(int switcherId, int position, string name)
+        public RenameInputCommand(int switcherId, int position, string name)
         {
-            SwitcherId = switcherId;
+            SwitcherId = switcherId; 
             Position = position;
             Name = name;
         }
@@ -12,5 +12,6 @@
         internal int SwitcherId { get; }
         internal int Position { get; }
         internal string Name { get; }
+        internal override ActionType Type { get; } = ActionType.RenameInput;
     }
 }

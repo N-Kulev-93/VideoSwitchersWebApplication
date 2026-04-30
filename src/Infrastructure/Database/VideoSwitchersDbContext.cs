@@ -1,4 +1,4 @@
-﻿using Application.Domain;
+﻿using Application.Command.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

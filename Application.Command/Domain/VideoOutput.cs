@@ -1,4 +1,4 @@
-﻿namespace Application.Domain
+﻿namespace Application.Command
 {
     public class VideoOutput
     {

@@ -1,0 +1,20 @@
+BEGIN TRANSACTION;
+CREATE TABLE IF NOT EXISTS "VideoInputs" (
+	"Position"	INTEGER NOT NULL,
+	"Name"	TEXT,
+	"SwitcherId"	INTEGER NOT NULL,
+	PRIMARY KEY("Position","SwitcherId")
+);
+CREATE TABLE IF NOT EXISTS "VideoOutputs" (
+	"Position"	INTEGER NOT NULL,
+	"Name"	TEXT,
+	"SwitcherId"	INTEGER NOT NULL,
+	"InputPosition"	INTEGER DEFAULT null,
+	PRIMARY KEY("Position","SwitcherId")
+);
+CREATE TABLE IF NOT EXISTS "VideoSwitchers" (
+	"Id"	INTEGER NOT NULL UNIQUE,
+	"Name"	TEXT NOT NULL,
+	PRIMARY KEY("Id" AUTOINCREMENT)
+);
+COMMIT;

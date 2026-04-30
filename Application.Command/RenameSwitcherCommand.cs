@@ -1,6 +1,6 @@
 ﻿namespace Application.Command
 {
-    public class RenameSwitcherCommand
+    public class RenameSwitcherCommand : ActionCommand
     {
         public RenameSwitcherCommand(int id, string name)
         {
@@ -10,5 +10,6 @@
 
         internal int Id { get; }
         internal string Name { get; }
+        internal override ActionType Type { get; } = ActionType.RenameSwitcher;
     }
 }

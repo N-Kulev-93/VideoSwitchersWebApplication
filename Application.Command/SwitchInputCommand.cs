@@ -1,6 +1,7 @@
 ﻿namespace Application.Command
 {
-    public class SwitchInputCommand
+    
+    public class SwitchInputCommand : ActionCommand
     {
         public SwitchInputCommand(int switcherId, int inputPosition, int outputPosition)
         {
@@ -12,5 +13,6 @@
         internal int SwitcherId { get; }
         internal int InputPosition { get; }
         internal int OutputPosition { get; }
+        internal override ActionType Type { get; } = ActionType.SwitchInput;
     }
 }
