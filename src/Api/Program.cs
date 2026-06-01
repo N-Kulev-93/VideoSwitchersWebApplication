@@ -1,4 +1,5 @@
 using Api;
+using Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +8,7 @@ builder.Services.AddControllers();
 // TODO: Complete OpenApi setup to be compliant with RFC 9457.
 builder.Services.AddOpenApi();
 builder.Services.AddApiServices();
+builder.Services.AddInfrastructureServices();
 
 var app = builder.Build();
 //TODO: Add logger middleware, non-sensitive data, limits, etc...
