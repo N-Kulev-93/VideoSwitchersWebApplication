@@ -1,4 +1,4 @@
-﻿namespace Application.Write.Domain
+﻿namespace Application.Write
 {
     public class DomainResult
     {

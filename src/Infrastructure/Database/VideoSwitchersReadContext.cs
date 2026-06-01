@@ -1,12 +1,22 @@
 ﻿using Application.Read;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using ActionConfiguration = Application.Read.ActionConfiguration;
+using ConnectionConfiguration = Application.Read.ConnectionConfiguration;
 
 namespace Infrastructure.Database
 {
     public class VideoSwitchersReadContext : DbContext
     {
+        public VideoSwitchersReadContext(DbContextOptions<VideoSwitchersReadContext> options) : base(options)
+        {
+        }
+
+        protected VideoSwitchersReadContext()
+        {
+        }
+
+        public DbSet<VideoSwitcher> VideoSwitchers { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder
@@ -59,7 +69,7 @@ namespace Infrastructure.Database
                 .Entity<VideoSwitcher>()
                 .HasOne(vs => vs.ConnectionConfiguration)
                 .WithOne()
-                .HasForeignKey("SwitcherId");
+                .HasForeignKey<ConnectionConfiguration>("SwitcherId");
             modelBuilder
                 .Entity<VideoSwitcher>()
                 .HasMany(vs => vs.ActionConfigurations)

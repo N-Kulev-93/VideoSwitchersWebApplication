@@ -1,92 +1,79 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Application.Write;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Database
 {
-
     public class VideoSwitchersWriteContext : DbContext
     {
-        public VideoSwitchersWriteContext(DbContextOptions options) : base(options)
+        public VideoSwitchersWriteContext(DbContextOptions<VideoSwitchersWriteContext> options) : base(options)
+        {
+        }
+
+        protected VideoSwitchersWriteContext()
         {
         }
 
         public DbSet<VideoSwitcher> VideoSwitchers { get; set; }
-        public DbSet<VideoInput> VideoInputs { get; set; }
-        public DbSet<VideoOutput> VideoOutputs { get; set; }
-        public DbSet<ActionSettings> ActionsSettings { get; set; }
-        public DbSet<ConnectionSettings> ConnectionSettings { get; set; }
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-        }
-    }
 
-    public class VideoSwitchersQueryContext : VideoSwitchersWriteContext
-    {
-        public VideoSwitchersQueryContext(DbContextOptions options) : base(options)
-        {
-        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
+            modelBuilder
+                .Entity<VideoOutput>()
+                .Property("SwitcherId");
+            modelBuilder
+                .Entity<VideoOutput>()
+                .ToTable("VideoOutputs")
+                .HasKey("SwitcherId", "Position");
 
-            modelBuilder.Entity<VideoSwitcher>()
-                .HasMany(s => s.Inputs)
-                .WithOne()
-                .HasForeignKey("SwitcherId")
-                .IsRequired();
+            modelBuilder
+                .Entity<VideoInput>()
+                .Property("SwitcherId");
+            modelBuilder
+                .Entity<VideoInput>()
+                .ToTable("VideoInputs")
+                .HasKey("SwitcherId", "Position");
 
-            modelBuilder.Entity<VideoSwitcher>()
-                .HasMany(s => s.Outputs)
-                .WithOne()
-                .HasForeignKey("SwitcherId")
-                .IsRequired();
+            modelBuilder
+                .Entity<ActionConfiguration>()
+                .Property("SwitcherId");
+            modelBuilder
+                .Entity<ActionConfiguration>()
+                .ToTable("ActionConfigurations")
+                .HasKey("Type", "SwitcherId");
 
-            modelBuilder.Entity<VideoSwitcher>()
-                .HasOne(s => s.ConnectionSettings)
-                .WithOne()
-                .HasForeignKey("Id")
-                .HasPrincipalKey("ConnectionSettingsId")
-                .IsRequired();
+            modelBuilder
+                .Entity<ConnectionConfiguration>()
+                .Property("SwitcherId");
+            modelBuilder
+                .Entity<ConnectionConfiguration>()
+                .ToTable("ConnectionConfigurations")
+                .HasKey("Type", "SwitcherId");
 
-            modelBuilder.Entity<VideoSwitcher>()
-                .HasMany(s => s.ActionsSettings)
-                .WithOne()
-                .HasForeignKey("SwitcherId")
-                .IsRequired();
-        }
-    }
-
-    public class VideoSwitchersWriteContext : DbContext
-    {
-        public VideoSwitchersWriteContext(DbContextOptions options) : base(options)
-        {
-        }
-
-        public DbSet<VideoSwitcher> VideoSwitchers { get; set; }
-        
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<VideoSwitcher>()
+            modelBuilder
+                .Entity<VideoSwitcher>()
                 .ToTable("VideoSwitchers")
                 .HasKey("Id");
-
-            modelBuilder.Entity<VideoInput>()
-                .ToTable("VideoInputs")
-                .HasKey("Position", "SwitcherId");
-
-            modelBuilder.Entity<VideoOutput>()
-                .ToTable("VideoOutputs")
-                .HasKey("Position", "SwitcherId");
-
-            modelBuilder.Entity<ConnectionSettings>()
-                .ToTable("ConnectionSettings")
-                .HasKey("Id");
-            
-            modelBuilder.Entity<ActionSettings>()
-                .ToTable("ActionsSettings")
-                .HasKey("Id");
+            modelBuilder
+                .Entity<VideoSwitcher>()
+                .HasMany(vs => vs.Inputs)
+                .WithOne()
+                .HasForeignKey("SwitcherId");
+            modelBuilder
+                .Entity<VideoSwitcher>()
+                .HasMany(vs => vs.Outputs)
+                .WithOne()
+                .HasForeignKey("SwitcherId");
+            modelBuilder
+                .Entity<VideoSwitcher>()
+                .HasOne(vs => vs.ConnectionConfiguration)
+                .WithOne()
+                .HasForeignKey<ConnectionConfiguration>("SwitcherId");
+            modelBuilder
+                .Entity<VideoSwitcher>()
+                .HasMany(vs => vs.ActionConfigurations)
+                .WithOne()
+                .HasForeignKey("SwitcherId");
         }
     }
-
 }

@@ -1,11 +1,8 @@
-﻿using Application.Read;
-using Application.Write.Domain;
-using System.Diagnostics.CodeAnalysis;
-using System.Runtime.Intrinsics.Arm;
-
-namespace Application.Write
+﻿namespace Application.Write
 {
     // TODO: Do we need this class?
+    // I'm starting to change my mind about aggregates concept in ddd world.
+    // My attention towards functional event sourcing is increasing rapidly...
     public class VideoSwitcherArgumentException : Exception
     {
         public VideoSwitcherArgumentException()
@@ -24,9 +21,14 @@ namespace Application.Write
         public string Name { get; private set; } = null!;
         public ICollection<VideoInput> Inputs { get; private set; } = null!;
         public ICollection<VideoOutput> Outputs { get; private set; } = null!;
-        public ConnectionConfiguration ConnectionConfiguration { get; private set; } = null!;
-        public IConnection Connection { get; private set; } = null!;
         public ICollection<ActionConfiguration> ActionConfigurations { get; private set; } = null!;
+        public ConnectionConfiguration ConnectionConfiguration { get; private set; } = null!;
+
+        /// <summary>
+        /// Switch is implemented in infrastructure, initialize with IMaterializedInterceptor,
+        /// When turn on creates runtime connection source based on connection type with settings 
+        /// from provided configuration.
+        /// </summary>
 
         public DomainResult Rename(string name)
         {
@@ -119,17 +121,17 @@ namespace Application.Write
         public DomainResult OpenConnection()
         {
             var result = new DomainResult(maxErrorCapacity: 2);
-            // Is this infrastructure or domain concern ?
-            if (Connection.IsOpen)
+         //   // Is this infrastructure or domain concern ?
+        //    if (ConnectionSwitch.IsOpen)
                 result.AddErrorMessage("");
 
-            if (!this.ConnectionConfiguration.IsComplete)
+        //    if (!this.ConnectionConfiguration.IsComplete)
                 result.AddErrorMessage("");
 
             if (result.IsFailure) return result;
 
-            if (this.ConnectionConfiguration.IsComplete) // Always true, investigate how to aknowledge the compilator ...
-                this.Connection.Open(this.ConnectionConfiguration.SettingsJSON); // domain or infra for validation hm ...
+       //     if (this.ConnectionConfiguration.IsComplete) // Always true, investigate how to aknowledge the compilator ...
+          //      this.ConnectionSwitch.Open(this.ConnectionConfiguration.SettingsJSON); // domain or infra for validation hm ...
             //TODO: Infralayer Runtime initialize instance(connection internal source).
             return result;
         }
@@ -144,7 +146,7 @@ namespace Application.Write
         public DomainResult ConfigureConnectionType(ConnectionType type)
         {
             var result = new DomainResult(maxErrorCapacity: 1);
-            if (this.Connection.IsOpen)
+            //if (this.ConnectionSwitch.IsOpen)
             {
                 result.AddErrorMessage("Already open...close existing and configure.");
                 return result;
@@ -157,9 +159,9 @@ namespace Application.Write
             }
 
             // compilator ...
-            this.ConnectionConfiguration!.Type = type;
+            //this.ConnectionConfiguration!.Type = type;
             //Infrastructure layer -> change internal source instance with implementation depending on type.
-            this.Connection.ChangeType(type);
+            //this.ConnectionSwitch.ChangeType(type);
             //DbContext persist, 
             return result;
         }
@@ -168,21 +170,21 @@ namespace Application.Write
         {
             var result = new DomainResult(maxErrorCapacity: 1);
 
-            if (this.Connection.IsOpen)
-            {
-                result.AddErrorMessage("Already open...close existing and configure.");
-            }
+            //if (this.ConnectionSwitch.IsOpen)
+            //{
+            //    result.AddErrorMessage("Already open...close existing and configure.");
+            //}
 
-            if (!ConfiguredConnection)
-            {
-                result.AddErrorMessage("Configure connection type then settings.");
-            }
+            //if (!ConfiguredConnection)
+            //{
+            //    result.AddErrorMessage("Configure connection type then settings.");
+            //}
 
-            if (result.IsFailure) return result;
+            //if (result.IsFailure) return result;
 
-            // If this line is reached its always configured but we cant lie the compilator...
-            if (ConfiguredConnection)
-            this.ConnectionConfiguration.SettingsJSON = settingsJSON;
+            //// If this line is reached its always configured but we cant lie the compilator...
+            //if (ConfiguredConnection)
+            //this.ConnectionConfiguration.SettingsJSON = settingsJSON;
 
             return new DomainResult(maxErrorCapacity: 2);
         }
