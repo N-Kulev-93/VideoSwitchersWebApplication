@@ -7,7 +7,7 @@
         public required IEnumerable<VideoInput> Inputs { get; set; }
         public required IEnumerable<VideoOutput> Outputs { get; set; }
         public required ConnectionConfiguration ConnectionConfiguration { get; set; }
-
         public required IEnumerable<ActionConfiguration> ActionConfigurations { get; set; }
+        public bool IsOnline { get; set; }
     }
 }

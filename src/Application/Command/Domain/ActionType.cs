@@ -3,12 +3,13 @@
     public enum ActionType
     {
         Unknown = 0,
-        SwitchSource = 1,
+        SwitchInput = 1,
         RenameSwitcher =2,
         RenameInput = 3,
         RenameOutput = 4,
-        ConfigureConnection = 5,
-        ConfigureAction = 6,
-        OpenConnection = 7
+        OpenConnection = 7,
+        CloseConnection = 8,
+        SelectConnectionConfiguration = 9,
+        SelectActionConfiguration = 10
     }
 }

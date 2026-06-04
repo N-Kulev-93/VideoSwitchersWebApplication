@@ -1,9 +1,9 @@
-﻿using Infrastructure.Database;
+﻿using Application.Services;
+using Infrastructure.Database;
+using Infrastructure.Interface;
+using Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Infrastructure
 {
@@ -11,13 +11,34 @@ namespace Infrastructure
     {
         public static IServiceCollection AddInfrastructureServices(this IServiceCollection services)
         {
+            return services
+                .AddDatabaseServices()
+                .AddConnectionServices();
+        }
+
+        static IServiceCollection AddDatabaseServices(this IServiceCollection services)
+        {
             var dir = Directory.GetParent(Directory.GetCurrentDirectory());
 
             // TODO: ...
             var dbPath = $"{dir}/Infrastructure/Database/VideoSwitchers.Development.db";
-            services.AddDbContext<VideoSwitchersReadContext>(options => options.UseSqlite($"Data Source={dbPath}"));
-            services.AddDbContext<VideoSwitchersWriteContext>(options => options.UseSqlite($"Data Source={dbPath}"));
+
+            var readMaterializer = new SwitcherReadConnectionStatusMaterializer();
+            var writeMaterializer = new SwitcherWriteConnectionStatusMaterializer();
+            services.AddDbContext<VideoSwitchersReadContext>(options => options.UseSqlite($"Data Source={dbPath}").AddInterceptors(interceptors: readMaterializer));
+            services.AddDbContext<VideoSwitchersWriteContext>(options => options.UseSqlite($"Data Source={dbPath}").AddInterceptors(interceptors: writeMaterializer));
+
             return services;
+        }
+
+        static IServiceCollection AddConnectionServices(this IServiceCollection services)
+        { 
+            services.AddSingleton<SwitcherRuntimeConnectionService>();
+            services.AddSingleton<ISwitcherManagedConnectionService>(services => services.GetService<SwitcherRuntimeConnectionService>() ?? throw new NullReferenceException());
+            services.AddSingleton<ISwitcherConnectionStatusService>(services => services.GetService<SwitcherRuntimeConnectionService>() ?? throw new NullReferenceException());
+            services.AddSingleton<ISwitcherConnectionProviderService>(services => services.GetService<SwitcherRuntimeConnectionService>() ?? throw new NullReferenceException());
+            return services;
+
         }
     }
 }

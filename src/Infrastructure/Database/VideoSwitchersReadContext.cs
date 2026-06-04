@@ -5,7 +5,7 @@ using ConnectionConfiguration = Application.Read.ConnectionConfiguration;
 
 namespace Infrastructure.Database
 {
-    public class VideoSwitchersReadContext : DbContext
+    internal class VideoSwitchersReadContext : DbContext
     {
         public VideoSwitchersReadContext(DbContextOptions<VideoSwitchersReadContext> options) : base(options)
         {
@@ -75,6 +75,9 @@ namespace Infrastructure.Database
                 .HasMany(vs => vs.ActionConfigurations)
                 .WithOne()
                 .HasForeignKey("SwitcherId");
+            modelBuilder
+                .Entity<VideoSwitcher>()
+                .Ignore(vs => vs.IsOnline);
         }
     }
 }

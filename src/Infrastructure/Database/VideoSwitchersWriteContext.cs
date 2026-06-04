@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Database
 {
-    public class VideoSwitchersWriteContext : DbContext
+    internal class VideoSwitchersWriteContext : DbContext
     {
         public VideoSwitchersWriteContext(DbContextOptions<VideoSwitchersWriteContext> options) : base(options)
         {
@@ -74,6 +74,9 @@ namespace Infrastructure.Database
                 .HasMany(vs => vs.ActionConfigurations)
                 .WithOne()
                 .HasForeignKey("SwitcherId");
+            modelBuilder
+                .Entity<VideoSwitcher>()
+                .Ignore(vs => vs.IsOnline);
         }
     }
 }
