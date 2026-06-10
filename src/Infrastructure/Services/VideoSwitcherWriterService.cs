@@ -10,7 +10,7 @@ using System.Text;
 namespace Infrastructure.Services
 {
 
-    internal class VideoSwitcherWriterService : IVideoSwitcherWriterService, IDisposable
+    internal class VideoSwitcherWriterService : ISwitcherWriterService, IDisposable
     {
         readonly VideoSwitchersWriteContext _dbContext;
         VideoSwitcher? _currentTarget;

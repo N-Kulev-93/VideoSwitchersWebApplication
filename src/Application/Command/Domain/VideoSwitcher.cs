@@ -1,8 +1,28 @@
 ﻿namespace Application.Write
 {
-    public class VideoSwitcher
+    public class SimpleEntity : IEquatable<SimpleEntity>
+    {
+        public int Id { get; set; }
+        
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Id);
+        }
+
+        public override bool Equals(object? obj)
+        {
+            return obj is SimpleEntity && this.Equals(obj as SimpleEntity); 
+        }
+
+        public bool Equals(SimpleEntity? other)
+        {
+            return this.Id.Equals(other?.Id);
+        }
+    }
+
+    public class VideoSwitcher : SimpleEntity
     { 
-        public int Id { get; private set; }
+
         public string Name { get; private set; } 
         public ICollection<VideoInput> Inputs { get; private set; }
         public ICollection<VideoOutput> Outputs { get; private set; }

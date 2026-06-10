@@ -20,12 +20,12 @@ namespace Infrastructure.Services
             _switcherConnectionMap = new ConcurrentDictionary<int, IRuntimeCommandConnection>();        
         }
 
-        public void CloseConnection(int switcherId)
+        public void CloseConnection(VideoSwitcher switcher)
         {
             throw new NotImplementedException();
         }
 
-        public void OpenConnection(int switcherId, ConnectionConfiguration configuration)
+        public void OpenConnection(VideoSwitcher switcher)
         {
             throw new NotImplementedException();
         }

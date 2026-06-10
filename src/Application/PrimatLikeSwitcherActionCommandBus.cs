@@ -4,6 +4,7 @@ using Application.Read;
 using Application.Services;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace Application
@@ -20,7 +21,7 @@ namespace Application
         ///  Current plan for this service is to be transient so it handles internaly entity changes that should not persist if the result of the action performed is failure.
         ///  Usually bus services are static in these scenarios, how we handle this ? ... TODO...
         /// </summary>
-        IVideoSwitcherWriterService _writerService;
+        ISwitcherActionAtomicExecutionWriterService _writerService;
 
         public PrimatLikeSwitcherActionCommandBus()
         {
@@ -55,12 +56,18 @@ namespace Application
 
         public void ExecuteOpenConnection(OpenConnectionCommand cmd)
         {
-            // Try assign connection with private setter using EF.Propery<>...
+            var switcher = _writerService.ReadSingle(cmd.Id);
+            if (switcher is null) return;
+
+            _connectionService.OpenConnection(switcher);
         }
 
         public void ExecuteCloseConnection(CloseConnectionCommand cmd)
         {
+            var switcher = _writerService.ReadSingle(cmd.Id);
+            if (switcher is null) return;
 
+            _connectionService.CloseConnection(switcher);
         }
 
         public void ExecuteSwitchInputAction(SwitchInputCommand cmd)

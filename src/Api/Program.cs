@@ -1,14 +1,24 @@
 using Api;
 using Infrastructure;
+using Infrastructure.Logger;
+using JJConsulting.Infisical.Configuration;
+using dotenv.net;
 
-var builder = WebApplication.CreateBuilder(args);
+DotEnv.Load();
+
+var builder = WebApplication.CreateBuilder();
+
+var config = MachineIdentityInfisicalConfig.FromConfiguration(builder.Configuration.GetSection("Vault"));
+builder.Host.AddInfisical(config);
+
+builder.Services.AddLoggerServices(builder.Configuration);
 
 builder.Services.AddControllers();
-
 // TODO: Complete OpenApi setup to be compliant with RFC 9457.
 builder.Services.AddOpenApi();
 builder.Services.AddApiServices();
 builder.Services.AddInfrastructureServices();
+
 
 var app = builder.Build();
 //TODO: Add logger middleware, non-sensitive data, limits, etc...

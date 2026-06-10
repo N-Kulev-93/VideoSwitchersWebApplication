@@ -2,7 +2,9 @@
 using Infrastructure.Database;
 using Infrastructure.Interface;
 using Infrastructure.Services;
+using JJConsulting.Infisical.Configuration;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Infrastructure
@@ -39,6 +41,13 @@ namespace Infrastructure
             services.AddSingleton<ISwitcherConnectionProviderService>(services => services.GetService<SwitcherRuntimeConnectionService>() ?? throw new NullReferenceException());
             return services;
 
+        }
+
+        static IServiceCollection AddVaultServices(this IServiceCollection services, IConfiguration configuration)
+        {
+            var config = MachineIdentityInfisicalConfig.FromConfiguration(configuration.GetSection("Vault"));
+            
+            return services;
         }
     }
 }

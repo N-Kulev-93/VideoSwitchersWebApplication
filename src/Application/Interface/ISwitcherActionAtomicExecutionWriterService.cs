@@ -22,7 +22,7 @@ namespace Application.Interface
         }
     }
 
-    public interface IVideoSwitcherWriterService
+    public interface ISwitcherWriterService
     {
         /// <summary>
         /// Command targeted video switcher.
@@ -37,5 +37,10 @@ namespace Application.Interface
         /// <param name="videoSwitcher"></param>
         /// <returns></returns>
         void Write(VideoSwitcher videoSwitcher);
+    }
+
+    public interface ISwitcherActionAtomicExecutionWriterService : ISwitcherWriterService
+    {
+        void ExecuteAtomicActionWrite();
     }
 }

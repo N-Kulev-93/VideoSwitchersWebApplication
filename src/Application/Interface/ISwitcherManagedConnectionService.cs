@@ -4,7 +4,7 @@ namespace Application.Services
 {
     public interface ISwitcherManagedConnectionService
     {
-        void OpenConnection(int switcherId, ConnectionConfiguration configuration);
-        void CloseConnection(int switcherId);
+        void OpenConnection(VideoSwitcher switcher);
+        void CloseConnection(VideoSwitcher switcher);
     }
 }
