@@ -1,4 +1,4 @@
-﻿namespace Application.Write
+﻿namespace Application.Command
 {
     public enum ActionType
     {

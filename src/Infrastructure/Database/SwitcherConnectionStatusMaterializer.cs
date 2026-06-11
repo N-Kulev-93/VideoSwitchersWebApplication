@@ -1,11 +1,11 @@
-﻿using Application.Read;
+﻿using Application.Query;
 using Infrastructure.Interface;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using System.Reflection.PortableExecutable;
 using IStatusService = Infrastructure.Interface.ISwitcherConnectionStatusService;
-using ReadContextVideoSwitcher = Application.Read.VideoSwitcher;
-using WriteContextVideoSwitcher = Application.Write.VideoSwitcher;
+using ReadContextVideoSwitcher = Application.Query.VideoSwitcher;
+using WriteContextVideoSwitcher = Application.Command.VideoSwitcher;
 
 namespace Infrastructure.Database
 {

@@ -1,7 +1,7 @@
 ﻿using Api.Requests;
 using Application.Interface;
 using Application.Services;
-using Application.Write;
+using Application.Command;
 using Infrastructure.Database;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;

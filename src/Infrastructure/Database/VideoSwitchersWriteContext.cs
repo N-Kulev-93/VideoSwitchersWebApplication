@@ -1,4 +1,4 @@
-﻿using Application.Write;
+﻿using Application.Command;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Database

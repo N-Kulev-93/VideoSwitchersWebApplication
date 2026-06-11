@@ -1,6 +1,6 @@
 ﻿using Application.Services;
-using Application.Write;
-using Application.Write.Domain;
+using Application.Command;
+using Application.Command.Domain;
 using Infrastructure.Interface;
 using System;
 using System.Collections.Concurrent;

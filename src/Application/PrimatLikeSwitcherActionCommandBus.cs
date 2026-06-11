@@ -1,6 +1,6 @@
 ﻿using Application.Command;
 using Application.Interface;
-using Application.Read;
+using Application.Query;
 using Application.Services;
 using System;
 using System.Collections.Generic;
@@ -21,7 +21,7 @@ namespace Application
         ///  Current plan for this service is to be transient so it handles internaly entity changes that should not persist if the result of the action performed is failure.
         ///  Usually bus services are static in these scenarios, how we handle this ? ... TODO...
         /// </summary>
-        ISwitcherActionAtomicExecutionWriterService _writerService;
+        ISwitcherWriterService _writerService;
 
         public PrimatLikeSwitcherActionCommandBus()
         {
@@ -32,21 +32,21 @@ namespace Application
         {
             switch (cmd.ActionType)
             {
-                case Write.ActionType.Unknown:
+                case Command.ActionType.Unknown:
                     break;
-                case Write.ActionType.SwitchInput:
+                case Command.ActionType.SwitchInput:
                     break;
-                case Write.ActionType.RenameSwitcher:
+                case Command.ActionType.RenameSwitcher:
                     break;
-                case Write.ActionType.RenameInput:
+                case Command.ActionType.RenameInput:
                     break;
-                case Write.ActionType.RenameOutput:
+                case Command.ActionType.RenameOutput:
                     break;
-                case Write.ActionType.OpenConnection:
+                case Command.ActionType.OpenConnection:
                     break;
-                case Write.ActionType.SelectActionConfiguration:
+                case Command.ActionType.SelectActionConfiguration:
                     break;
-                case Write.ActionType.SelectConnectionConfiguration:
+                case Command.ActionType.SelectConnectionConfiguration:
                     break;
                 default:
                     break;

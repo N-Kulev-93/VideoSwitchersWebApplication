@@ -1,7 +1,7 @@
-﻿using Application.Read;
+﻿using Application.Query;
 using Microsoft.EntityFrameworkCore;
-using ActionConfiguration = Application.Read.ActionConfiguration;
-using ConnectionConfiguration = Application.Read.ConnectionConfiguration;
+using ActionConfiguration = Application.Query.ActionConfiguration;
+using ConnectionConfiguration = Application.Query.ConnectionConfiguration;
 
 namespace Infrastructure.Database
 {

@@ -1,41 +1,40 @@
 using Api;
 using Infrastructure;
-using Infrastructure.Logger;
-using JJConsulting.Infisical.Configuration;
 using dotenv.net;
 
-DotEnv.Load();
-
-var builder = WebApplication.CreateBuilder();
-
-var config = MachineIdentityInfisicalConfig.FromConfiguration(builder.Configuration.GetSection("Vault"));
-builder.Host.AddInfisical(config);
-
-builder.Services.AddLoggerServices(builder.Configuration);
-
-builder.Services.AddControllers();
-// TODO: Complete OpenApi setup to be compliant with RFC 9457.
-builder.Services.AddOpenApi();
-builder.Services.AddApiServices();
-builder.Services.AddInfrastructureServices();
-
-
-var app = builder.Build();
-//TODO: Add logger middleware, non-sensitive data, limits, etc...
-if (app.Environment.IsDevelopment())
+public partial class Program
 {
-    app.MapOpenApi(pattern: Constants.OpenApiDocumentRoute); 
-    app.UseSwaggerUI(setupAction: (options) => options.SwaggerEndpoint(url: Constants.OpenApiDocumentRoute, name: Constants.OpenApiDocumentName));
+    private static void Main(string[] args)
+    {
+        DotEnv.Load();
+        var builder = WebApplication.CreateBuilder();
+
+        builder.Host.AddHostServices(builder.Configuration);
+        builder.Services.AddControllers();
+        // TODO: Complete OpenApi setup to be compliant with RFC 9457.
+        builder.Services.AddOpenApi();
+        builder.Services.AddApiServices();
+        builder.Services.AddInfrastructureServices();
+
+
+        var app = builder.Build();
+        //TODO: Add logger middleware, non-sensitive data, limits, etc...
+        if (app.Environment.IsDevelopment())
+        {
+            app.MapOpenApi(pattern: Constants.OpenApiDocumentRoute);
+            app.UseSwaggerUI(setupAction: (options) => options.SwaggerEndpoint(url: Constants.OpenApiDocumentRoute, name: Constants.OpenApiDocumentName));
+        }
+        else
+        {
+            app.UseHttpsRedirection(); //TODO: Do we need in isolated dev environment.
+            app.UseExceptionHandler(errorHandlingPath: "/error"); //TODO: Not a dev env dependency, add later...
+        }
+
+        app.UseDefaultFiles();
+        app.UseStaticFiles();
+
+        app.MapControllers();
+
+        app.Run();
+    }
 }
-else
-{
-    app.UseHttpsRedirection(); //TODO: Do we need in isolated dev environment.
-    app.UseExceptionHandler(errorHandlingPath: "/error"); //TODO: Not a dev env dependency, add later...
-}
-
-app.UseDefaultFiles();
-app.UseStaticFiles();
-
-app.MapControllers();
-
-app.Run();

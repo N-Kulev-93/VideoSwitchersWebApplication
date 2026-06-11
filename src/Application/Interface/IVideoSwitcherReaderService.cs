@@ -1,4 +1,4 @@
-﻿using Application.Read;
+﻿using Application.Query;
 
 namespace Application.Interface
 {

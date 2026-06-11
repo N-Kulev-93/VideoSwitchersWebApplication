@@ -1,4 +1,4 @@
-﻿using Application.Write;
+﻿using Application.Command;
 using System;
 namespace Application.Interface
 {
@@ -37,10 +37,5 @@ namespace Application.Interface
         /// <param name="videoSwitcher"></param>
         /// <returns></returns>
         void Write(VideoSwitcher videoSwitcher);
-    }
-
-    public interface ISwitcherActionAtomicExecutionWriterService : ISwitcherWriterService
-    {
-        void ExecuteAtomicActionWrite();
     }
 }

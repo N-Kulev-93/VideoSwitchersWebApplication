@@ -1,4 +1,4 @@
-﻿namespace Application.Read
+﻿namespace Application.Query
 {
     public class ActionConfiguration
     {

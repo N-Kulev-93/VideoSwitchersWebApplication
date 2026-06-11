@@ -1,4 +1,4 @@
-﻿using Application.Write.Domain;
+﻿using Application.Command.Domain;
 
 namespace Infrastructure.Interface
 {

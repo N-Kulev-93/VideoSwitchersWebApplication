@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Application.Write.Domain
+namespace Application.Command.Domain
 {
     public interface IManagedConnection
     {

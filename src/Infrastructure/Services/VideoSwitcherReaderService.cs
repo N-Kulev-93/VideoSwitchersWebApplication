@@ -1,5 +1,5 @@
 ﻿using Application.Interface;
-using Application.Read;
+using Application.Query;
 using Infrastructure.Database;
 
 namespace Infrastructure.Services

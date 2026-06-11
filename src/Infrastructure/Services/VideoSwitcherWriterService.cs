@@ -1,5 +1,5 @@
 ﻿using Application.Interface;
-using Application.Write;
+using Application.Command;
 using Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
