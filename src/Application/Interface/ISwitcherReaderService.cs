@@ -2,7 +2,7 @@
 
 namespace Application.Interface
 {
-    public interface IVideoSwitcherReaderService
+    public interface ISwitcherReaderService
     {
         IQueryable<VideoSwitcher> Read();
     }

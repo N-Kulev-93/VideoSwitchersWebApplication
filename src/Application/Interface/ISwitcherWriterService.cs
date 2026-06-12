@@ -29,13 +29,14 @@ namespace Application.Interface
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        VideoSwitcher? ReadSingle(int id);
-
+        VideoSwitcher? Read(int id);
+        void Write(VideoSwitcher videoSwitcher);
         /// <summary>
-        /// Persist video switcher.
+        ///  This shoudne be exposed to domain layer, check how to refactor 
+        ///  it only on infra level since the transactional logic is infrastructure concern.
         /// </summary>
         /// <param name="videoSwitcher"></param>
         /// <returns></returns>
-        void Write(VideoSwitcher videoSwitcher);
+        Action WriteUncommit(VideoSwitcher videoSwitcher);
     }
 }

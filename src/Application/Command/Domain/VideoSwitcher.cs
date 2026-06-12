@@ -2,7 +2,6 @@
 {
     public class VideoSwitcher : SimpleEntity
     { 
-
         public string Name { get; private set; } 
         public ICollection<VideoInput> Inputs { get; private set; }
         public ICollection<VideoOutput> Outputs { get; private set; }

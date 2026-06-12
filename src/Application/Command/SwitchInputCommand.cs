@@ -1,6 +1,4 @@
-﻿using Application.Command;
-
-namespace Application.Command
+﻿namespace Application.Command
 {
     public class SwitchInputCommand(int id, int inPosition, int outPosition) : ActionCommand
     {

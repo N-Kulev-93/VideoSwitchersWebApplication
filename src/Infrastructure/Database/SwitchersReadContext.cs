@@ -5,13 +5,13 @@ using ConnectionConfiguration = Application.Query.ConnectionConfiguration;
 
 namespace Infrastructure.Database
 {
-    internal class VideoSwitchersReadContext : DbContext
+    internal class SwitchersReadContext : DbContext
     {
-        public VideoSwitchersReadContext(DbContextOptions<VideoSwitchersReadContext> options) : base(options)
+        public SwitchersReadContext(DbContextOptions<SwitchersReadContext> options) : base(options)
         {
         }
 
-        protected VideoSwitchersReadContext()
+        protected SwitchersReadContext()
         {
         }
 

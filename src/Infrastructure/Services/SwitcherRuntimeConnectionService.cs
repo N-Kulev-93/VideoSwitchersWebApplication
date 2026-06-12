@@ -11,7 +11,7 @@ namespace Infrastructure.Services
 {
 
     //TODO: Dispose all connections on app termination ?
-    internal class SwitcherRuntimeConnectionService : ISwitcherManagedConnectionService, ISwitcherConnectionStatusService, ISwitcherConnectionProviderService
+    internal class SwitcherRuntimeConnectionService : ISwitcherManagedConnectionService, ISwitcherConnectionStatusService, IClientConnectionProviderService
     {
         readonly ConcurrentDictionary<int, IRuntimeCommandConnection> _switcherConnectionMap;
 
@@ -35,7 +35,7 @@ namespace Infrastructure.Services
             return _switcherConnectionMap.TryGetValue(key: switcherId, out IRuntimeCommandConnection? connection) && connection.IsOpen;
         }
 
-        public IRuntimeCommandConnection? GetCommandConnection(int switcherId)
+        public IRuntimeCommandConnection? Get(int switcherId)
         {
             return _switcherConnectionMap.GetValueOrDefault(key: switcherId);
         }

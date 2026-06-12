@@ -10,7 +10,7 @@ using System.Text;
 namespace Application
 {
     /// <summary>
-    ///TODO: actionType as class and actionCommand as generic => ?
+    /// This is temporary solution, it will be revised and updated or completely refactored accordingly in the near future...
     /// </summary>
     public class PrimatLikeSwitcherActionCommandBus
     {
@@ -56,7 +56,7 @@ namespace Application
 
         public void ExecuteOpenConnection(OpenConnectionCommand cmd)
         {
-            var switcher = _writerService.ReadSingle(cmd.Id);
+            var switcher = _writerService.Read(cmd.Id);
             if (switcher is null) return;
 
             _connectionService.OpenConnection(switcher);
@@ -64,7 +64,7 @@ namespace Application
 
         public void ExecuteCloseConnection(CloseConnectionCommand cmd)
         {
-            var switcher = _writerService.ReadSingle(cmd.Id);
+            var switcher = _writerService.Read(cmd.Id);
             if (switcher is null) return;
 
             _connectionService.CloseConnection(switcher);
@@ -72,7 +72,7 @@ namespace Application
 
         public void ExecuteSwitchInputAction(SwitchInputCommand cmd)
         {
-            var target = _writerService.ReadSingle(cmd.Id);
+            var target = _writerService.Read(cmd.Id);
             
             //TODO:...
             if (target is null) return;

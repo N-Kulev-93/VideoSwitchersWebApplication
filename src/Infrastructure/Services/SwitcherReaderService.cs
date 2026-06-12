@@ -4,11 +4,11 @@ using Infrastructure.Database;
 
 namespace Infrastructure.Services
 {
-    internal class VideoSwitcherReaderService : IVideoSwitcherReaderService
+    internal class SwitcherReaderService : ISwitcherReaderService
     {
-        readonly VideoSwitchersReadContext _dbContext;
+        readonly SwitchersReadContext _dbContext;
 
-        public VideoSwitcherReaderService(VideoSwitchersReadContext dbContext)
+        public SwitcherReaderService(SwitchersReadContext dbContext)
         {
             _dbContext = dbContext;
         }

@@ -3,13 +3,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Database
 {
-    internal class VideoSwitchersWriteContext : DbContext
+    internal class SwitchersWriteContext : DbContext
     {
-        public VideoSwitchersWriteContext(DbContextOptions<VideoSwitchersWriteContext> options) : base(options)
+        public SwitchersWriteContext(DbContextOptions<SwitchersWriteContext> options) : base(options)
         {
         }
 
-        protected VideoSwitchersWriteContext()
+        protected SwitchersWriteContext()
         {
         }
 

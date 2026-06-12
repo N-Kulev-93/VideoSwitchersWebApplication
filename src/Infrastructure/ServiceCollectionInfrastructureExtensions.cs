@@ -27,8 +27,8 @@ namespace Infrastructure
 
             var readMaterializer = new SwitcherReadConnectionStatusMaterializer();
             var writeMaterializer = new SwitcherWriteConnectionStatusMaterializer();
-            services.AddDbContext<VideoSwitchersReadContext>(options => options.UseSqlite($"Data Source={dbPath}").AddInterceptors(interceptors: readMaterializer));
-            services.AddDbContext<VideoSwitchersWriteContext>(options => options.UseSqlite($"Data Source={dbPath}").AddInterceptors(interceptors: writeMaterializer));
+            services.AddDbContext<SwitchersReadContext>(options => options.UseSqlite($"Data Source={dbPath}").AddInterceptors(interceptors: readMaterializer));
+            services.AddDbContext<SwitchersWriteContext>(options => options.UseSqlite($"Data Source={dbPath}").AddInterceptors(interceptors: writeMaterializer));
 
             return services;
         }
@@ -38,7 +38,7 @@ namespace Infrastructure
             services.AddSingleton<SwitcherRuntimeConnectionService>();
             services.AddSingleton<ISwitcherManagedConnectionService>(services => services.GetService<SwitcherRuntimeConnectionService>() ?? throw new NullReferenceException());
             services.AddSingleton<ISwitcherConnectionStatusService>(services => services.GetService<SwitcherRuntimeConnectionService>() ?? throw new NullReferenceException());
-            services.AddSingleton<ISwitcherConnectionProviderService>(services => services.GetService<SwitcherRuntimeConnectionService>() ?? throw new NullReferenceException());
+            services.AddSingleton<IClientConnectionProviderService>(services => services.GetService<SwitcherRuntimeConnectionService>() ?? throw new NullReferenceException());
             return services;
 
         }

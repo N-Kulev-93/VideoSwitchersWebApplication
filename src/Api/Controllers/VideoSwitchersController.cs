@@ -20,9 +20,9 @@ namespace Api.Controllers
     [ApiController]
     public class VideoSwitchersController : ControllerBase
     {
-        IVideoSwitcherReaderService _readerService;
+        ISwitcherReaderService _readerService;
 
-        public VideoSwitchersController(IVideoSwitcherReaderService readerService)
+        public VideoSwitchersController(ISwitcherReaderService readerService)
         {
             _readerService = readerService;
 
