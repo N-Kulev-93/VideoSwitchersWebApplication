@@ -1,17 +1,11 @@
-﻿using Api.Requests;
-using Application.Interface;
-using Application.Services;
+﻿using Application.Interface;
 using Application.Command;
-using Infrastructure.Database;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using OpenConnectionRequest = Api.Requests.OpenSwitcherConnectionRequest;
-using CloseConnectionRequest = Api.Requests.CloseSwitcherConnectionRequest;
 using RenameRequest = Api.Requests.RenameSwitcherRequest;
 using RenameInputRequest = Api.Requests.RenameSwitcherInputRequest;
 using RenameOutputRequest = Api.Requests.RenameSwitcherOutputRequest;
 using SwitchInputRequest = Api.Requests.SwitchVideoInputRequest;
-using Application.Command;
 // TODO: Configs ...
 
 namespace Api.Controllers
@@ -29,7 +23,7 @@ namespace Api.Controllers
         }
 
         [HttpGet]   
-        public async Task<ActionResult> GetAll()
+        public async Task<ActionResult> ReadAll()
         {
             var all = _readerService.Read();
 
@@ -37,14 +31,14 @@ namespace Api.Controllers
         }
 
         [HttpGet("{id:int}")]
-        public async Task<ActionResult> Get([FromRoute] int id)
+        public async Task<ActionResult> Read([FromRoute] int id)
         {
             var single = _readerService.Read().SingleOrDefaultAsync(vs => vs.Id.Equals(id));
 
             return single is not null ? Ok(single) : NotFound(id);
         }
 
-        [HttpPost("{id:int}/open-connection")]
+        [HttpPost("{id:int}/open-conn")]
         public ActionResult OpenConnection([FromRoute] int id)
         {
             var cmd = new OpenConnectionCommand(id);
@@ -52,7 +46,7 @@ namespace Api.Controllers
             return NoContent();
         }
 
-        [HttpPost("{id:int}/close-connection")]
+        [HttpPost("{id:int}/close-conn")]
         public ActionResult CloseConnection([FromRoute] int id)
         {
             var cmd = new CloseConnectionCommand(id);
@@ -92,14 +86,14 @@ namespace Api.Controllers
             return NoContent();
         }
 
-        [HttpPost("{id:int}/select-connection-config")]
+        [HttpPost("{id:int}/select-conn-config")]
         public ActionResult SelectConnectionConfiguration([FromRoute] int id)
         {
             throw new NotImplementedException();
         }
 
-        [HttpPost("{id:int}/select-actiontype-config")]
-        public ActionResult SelectActionTypeConfiguration([FromRoute] int id)
+        [HttpPost("{id:int}/select-action-config")]
+        public ActionResult SelectActionConfiguration([FromRoute] int id)
         {
             throw new NotImplementedException();
         }

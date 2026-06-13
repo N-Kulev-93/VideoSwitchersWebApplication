@@ -1,6 +1,7 @@
 ﻿using Application.Interface;
 using Application.Query;
 using Infrastructure.Database;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Services
 {
@@ -13,6 +14,6 @@ namespace Infrastructure.Services
             _dbContext = dbContext;
         }
 
-        public IQueryable<VideoSwitcher> Read() => _dbContext.VideoSwitchers;
+        public IQueryable<VideoSwitcher> Read() => _dbContext.VideoSwitchers.AsNoTracking();
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Application.Interface
 {
-    public interface ISwitcherActionUnitOfWork
+    public interface ISwitcherActionWriterUnitOfWork
     {
         /// <summary>
         /// Persist video switcher.

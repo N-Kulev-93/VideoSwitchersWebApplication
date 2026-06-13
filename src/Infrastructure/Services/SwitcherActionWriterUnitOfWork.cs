@@ -13,7 +13,7 @@ namespace Infrastructure.Services
     /// should be persisted atomicaly with the device's corresponding device command(as RS-232 or Telnet command, not application CQRS...)
     /// If device command fails we should not persist the domain model state and remain synced on both sides(database and device).
     /// </summary>
-    internal class SwitcherActionWriterUnitOfWork : ISwitcherActionUnitOfWork, IDisposable
+    internal class SwitcherActionWriterUnitOfWork : ISwitcherActionWriterUnitOfWork, IDisposable
     {
         readonly ISwitcherWriterService _writer;
         readonly IClientConnectionProviderService _connectionProvider;

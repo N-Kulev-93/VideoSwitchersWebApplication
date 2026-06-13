@@ -23,6 +23,7 @@ public partial class Program
         {
             app.MapOpenApi(pattern: Constants.OpenApiDocumentRoute);
             app.UseSwaggerUI(setupAction: (options) => options.SwaggerEndpoint(url: Constants.OpenApiDocumentRoute, name: Constants.OpenApiDocumentName));
+            app.UseDeveloperExceptionPage();
         }
         else
         {

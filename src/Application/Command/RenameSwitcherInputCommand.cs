@@ -10,4 +10,5 @@ namespace Application.Command
 
         public override ActionType ActionType => ActionType.RenameInput;
     }
+    ICommandHandler
 }

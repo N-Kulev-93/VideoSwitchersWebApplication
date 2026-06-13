@@ -16,7 +16,8 @@ namespace Infrastructure.Database
         }
 
         public DbSet<VideoSwitcher> VideoSwitchers { get; set; }
-
+        public DbSet<ActionConfiguration> ActionConfigurations { get; set; }
+        public DbSet<ActionConfiguration> ConnectionConfigurations { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder
