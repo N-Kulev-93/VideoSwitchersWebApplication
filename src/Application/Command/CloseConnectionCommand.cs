@@ -1,10 +1,9 @@
-﻿using Application.Command;
+﻿using Application.Interface;
 
 namespace Application.Command
 {
-    public class CloseConnectionCommand(int id) : ActionCommand
+    public class CloseConnectionCommand(int id) : ICommand
     {
-        public override ActionType ActionType => ActionType.CloseConnection;
         internal int Id { get; } = id;
     }
 }

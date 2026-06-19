@@ -1,12 +1,10 @@
-﻿using Application.Command;
+﻿using Application.Interface;
 
 namespace Application.Command
 {
-    public class RenameSwitcherCommand(int id, string name) : ActionCommand
+    public class RenameSwitcherCommand(int id, string name) : ICommand
     {
         internal int Id { get; } = id;
         internal string Name { get; } = name;
-        
-        public override ActionType ActionType => ActionType.RenameSwitcher;
     }
 }

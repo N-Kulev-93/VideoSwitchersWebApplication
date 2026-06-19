@@ -3,7 +3,7 @@ using Infrastructure.Interface;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using System.Reflection.PortableExecutable;
-using IStatusService = Infrastructure.Interface.ISwitcherConnectionStatusService;
+using IStatusService = Infrastructure.Interface.IClientConnectionStatusService;
 using ReadContextVideoSwitcher = Application.Query.VideoSwitcher;
 using WriteContextVideoSwitcher = Application.Command.VideoSwitcher;
 
@@ -18,7 +18,7 @@ namespace Infrastructure.Database
             {
                 var statusService = materializationData.Context.GetService<IStatusService>();
 
-                switcherInstance.IsOnline = statusService.HasOpenConnection(switcherInstance.Id);
+                switcherInstance.IsOnline = statusService.ContainsConnection(switcherInstance.Id);
 
                 return switcherInstance;
             }
@@ -36,7 +36,7 @@ namespace Infrastructure.Database
             {
                 var statusService = materializationData.Context.GetService<IStatusService>();
 
-                switcherInstance.IsOnline = statusService.HasOpenConnection(switcherInstance.Id);
+                switcherInstance.IsOnline = statusService.ContainsConnection(switcherInstance.Id);
 
                 return switcherInstance;
             }

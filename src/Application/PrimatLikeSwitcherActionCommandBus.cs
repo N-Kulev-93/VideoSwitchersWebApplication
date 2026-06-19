@@ -15,13 +15,13 @@ namespace Application
     public class PrimatLikeSwitcherActionCommandBus
     {
 
-        ISwitcherManagedConnectionService _connectionService;
+        IClientConnectionManager _connectionService;
 
         /// <summary>
         ///  Current plan for this service is to be transient so it handles internaly entity changes that should not persist if the result of the action performed is failure.
         ///  Usually bus services are static in these scenarios, how we handle this ? ... TODO...
         /// </summary>
-        ISwitcherWriterService _writerService;
+        ISwitcherWriter _writerService;
 
         public PrimatLikeSwitcherActionCommandBus()
         {
@@ -58,8 +58,8 @@ namespace Application
         {
             var switcher = _writerService.Read(cmd.Id);
             if (switcher is null) return;
-
-            _connectionService.OpenConnection(switcher);
+            var configId = switcher.ConnectionConfiguration
+            _connectionService.OpenConnection(cmd.Id);
         }
 
         public void ExecuteCloseConnection(CloseConnectionCommand cmd)
@@ -70,7 +70,7 @@ namespace Application
             _connectionService.CloseConnection(switcher);
         }
 
-        public void ExecuteSwitchInputAction(SwitchInputCommand cmd)
+        public void ExecuteSwitchInputAction(SetSwitcherOutputSourceInputCommand cmd)
         {
             var target = _writerService.Read(cmd.Id);
             

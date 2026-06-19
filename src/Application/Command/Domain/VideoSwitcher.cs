@@ -1,4 +1,6 @@
-﻿namespace Application.Command
+﻿using Application.Shared.Domain;
+
+namespace Application.Command
 {
     public class VideoSwitcher : SimpleEntity
     { 

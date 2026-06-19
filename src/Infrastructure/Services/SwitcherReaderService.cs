@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Services
 {
-    internal class SwitcherReaderService : ISwitcherReaderService
+    internal class SwitcherReaderService : ISwitcherReader
     {
-        readonly SwitchersReadContext _dbContext;
+        readonly SwitchersReadDbContext _dbContext;
 
-        public SwitcherReaderService(SwitchersReadContext dbContext)
+        public SwitcherReaderService(SwitchersReadDbContext dbContext)
         {
             _dbContext = dbContext;
         }

@@ -4,17 +4,17 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
-    [Route("api/action-configs")]
+    [Route("api/serialport-configs")]
     [ApiController]
-    public class ActionConfigurationsController : ControllerBase
+    public class SerialPortConfigurationsController : ControllerBase
     {
-        public ActionConfigurationsController()
+        public SerialPortConfigurationsController()
         {
             //TODO:...
         }
 
         [HttpPost]
-        public ActionResult Create([FromBody] CreateActionConfigurationRequest request)
+        public ActionResult Create([FromBody] CreateSerialPortConfigurationRequest request)
         {
 
             return Ok();
@@ -34,7 +34,7 @@ namespace Api.Controllers
         }
 
         [HttpPut("{id:int}")]
-        public ActionResult Update([FromRoute] int id, [FromBody] UpdateActionConfigurationRequest request)
+        public ActionResult Update([FromRoute] int id, [FromBody] UpdateSerialPortConfigurationRequest request)
         {
 
             return Ok();

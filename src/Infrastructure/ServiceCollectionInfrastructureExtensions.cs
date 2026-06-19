@@ -27,18 +27,18 @@ namespace Infrastructure
 
             var readMaterializer = new SwitcherReadConnectionStatusMaterializer();
             var writeMaterializer = new SwitcherWriteConnectionStatusMaterializer();
-            services.AddDbContext<SwitchersReadContext>(options => options.UseSqlite($"Data Source={dbPath}").AddInterceptors(interceptors: readMaterializer));
-            services.AddDbContext<SwitchersWriteContext>(options => options.UseSqlite($"Data Source={dbPath}").AddInterceptors(interceptors: writeMaterializer));
+            services.AddDbContext<SwitchersReadDbContext>(options => options.UseSqlite($"Data Source={dbPath}").AddInterceptors(interceptors: readMaterializer));
+            services.AddDbContext<SwitchersWriteDbContext>(options => options.UseSqlite($"Data Source={dbPath}").AddInterceptors(interceptors: writeMaterializer));
 
             return services;
         }
 
         static IServiceCollection AddConnectionServices(this IServiceCollection services)
         { 
-            services.AddSingleton<SwitcherRuntimeConnectionService>();
-            services.AddSingleton<ISwitcherManagedConnectionService>(services => services.GetService<SwitcherRuntimeConnectionService>() ?? throw new NullReferenceException());
-            services.AddSingleton<ISwitcherConnectionStatusService>(services => services.GetService<SwitcherRuntimeConnectionService>() ?? throw new NullReferenceException());
-            services.AddSingleton<IClientConnectionProviderService>(services => services.GetService<SwitcherRuntimeConnectionService>() ?? throw new NullReferenceException());
+            services.AddSingleton<ClientCommandRuntimeConnectionService>();
+            services.AddSingleton<IClientConnectionManager>(services => services.GetService<ClientCommandRuntimeConnectionService>() ?? throw new NullReferenceException());
+            services.AddSingleton<IClientConnectionStatusService>(services => services.GetService<ClientCommandRuntimeConnectionService>() ?? throw new NullReferenceException());
+            services.AddSingleton<IClientCommandConnectionProviderService>(services => services.GetService<ClientCommandRuntimeConnectionService>() ?? throw new NullReferenceException());
             return services;
 
         }

@@ -8,7 +8,7 @@ namespace Infrastructure.Services
     //TODO: static or not ...?
     internal static class SwitcherActionCommandFormatter
     {
-        internal static string FormatActionCommand(VideoSwitcher switcher, ActionType action)
+        internal static string Format(VideoSwitcher switcher, ActionType action)
         {
 
             //TODO:...

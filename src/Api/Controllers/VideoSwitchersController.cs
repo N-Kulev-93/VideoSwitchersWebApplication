@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RenameRequest = Api.Requests.RenameSwitcherRequest;
 using RenameInputRequest = Api.Requests.RenameSwitcherInputRequest;
-using RenameOutputRequest = Api.Requests.RenameSwitcherOutputRequest;
-using SwitchInputRequest = Api.Requests.SwitchVideoInputRequest;
+using RenameOutputRequest = Api.Requests.RenameSwitcherInterfaceRequest;
+using SwitchInputRequest = Api.Requests.SetSwitcherOutputSourceInputRequest;
 // TODO: Configs ...
 
 namespace Api.Controllers
@@ -14,9 +14,9 @@ namespace Api.Controllers
     [ApiController]
     public class VideoSwitchersController : ControllerBase
     {
-        ISwitcherReaderService _readerService;
+        ISwitcherReader _readerService;
 
-        public VideoSwitchersController(ISwitcherReaderService readerService)
+        public VideoSwitchersController(ISwitcherReader readerService)
         {
             _readerService = readerService;
 
@@ -86,6 +86,7 @@ namespace Api.Controllers
             return NoContent();
         }
 
+        // are configurations suitable for command approach
         [HttpPost("{id:int}/select-conn-config")]
         public ActionResult SelectConnectionConfiguration([FromRoute] int id)
         {

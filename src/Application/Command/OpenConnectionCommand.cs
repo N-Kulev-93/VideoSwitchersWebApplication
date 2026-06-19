@@ -1,10 +1,9 @@
-﻿using Application.Command;
+﻿using Application.Interface;
 
 namespace Application.Command
 {
-    public class OpenConnectionCommand(int id) : ActionCommand
+    public class OpenConnectionCommand(int id) : ICommand
     {
         internal int Id => id;
-        public override ActionType ActionType => ActionType.OpenConnection;
     }
 }
