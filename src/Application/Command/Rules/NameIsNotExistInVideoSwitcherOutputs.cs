@@ -5,11 +5,11 @@ using System.Text;
 
 namespace Application.Command
 {
-    internal class NameIsNotExistInVideoSwitcherInputs(string value) : Specification<VideoSwitcher>
+    internal class NameIsNotExistInVideoSwitcherOutputs(string value) : Specification<VideoSwitcher>
     {
         public override Expression<Func<VideoSwitcher, bool>> ToExpression()
         {
-            return switcher => !switcher.Inputs.Any(input => input.Name.Equals(value));
+            return switcher => !switcher.Outputs.Any(output => output.Name.Equals(value));
         }
     }
 }

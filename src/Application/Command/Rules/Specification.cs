@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text;
+﻿using System.Linq.Expressions;
 
-namespace Application.Command.Rules
+namespace Application.Command
 {
     internal abstract class Specification<T>
     {

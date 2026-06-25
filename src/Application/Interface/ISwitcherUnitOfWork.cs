@@ -1,4 +1,5 @@
 ﻿using Application.Command;
+using Application.Shared.Domain;
 
 namespace Application.Interface
 {

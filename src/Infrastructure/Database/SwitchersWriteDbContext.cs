@@ -1,4 +1,5 @@
 ﻿using Application.Command;
+using Application.Command.Domain.Settings;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Database
@@ -35,18 +36,18 @@ namespace Infrastructure.Database
                 .HasKey("SwitcherId", "Position");
 
             modelBuilder
-                .Entity<ActionConfiguration>()
+                .Entity<SwitcherAction>()
                 .Property("SwitcherId");
             modelBuilder
-                .Entity<ActionConfiguration>()
+                .Entity<SwitcherAction>()
                 .ToTable("ActionConfigurations")
                 .HasKey("Type", "SwitcherId");
 
             modelBuilder
-                .Entity<ConnectionConfiguration>()
+                .Entity<CommunicationSettings>()
                 .Property("SwitcherId");
             modelBuilder
-                .Entity<ConnectionConfiguration>()
+                .Entity<CommunicationSettings>()
                 .ToTable("ConnectionConfigurations")
                 .HasKey("Type", "SwitcherId");
 
@@ -68,10 +69,10 @@ namespace Infrastructure.Database
                 .Entity<VideoSwitcher>()
                 .HasOne(vs => vs.ConnectionConfiguration)
                 .WithOne()
-                .HasForeignKey<ConnectionConfiguration>("SwitcherId");
+                .HasForeignKey<CommunicationSettings>("SwitcherId");
             modelBuilder
                 .Entity<VideoSwitcher>()
-                .HasMany(vs => vs.ActionConfigurations)
+                .HasMany(vs => vs.Actions)
                 .WithOne()
                 .HasForeignKey("SwitcherId");
             modelBuilder

@@ -36,7 +36,7 @@ namespace Infrastructure
         static IServiceCollection AddConnectionServices(this IServiceCollection services)
         { 
             services.AddSingleton<ClientCommandRuntimeConnectionService>();
-            services.AddSingleton<IClientConnectionManager>(services => services.GetService<ClientCommandRuntimeConnectionService>() ?? throw new NullReferenceException());
+            services.AddSingleton<IClientCommunicationStorage>(services => services.GetService<ClientCommandRuntimeConnectionService>() ?? throw new NullReferenceException());
             services.AddSingleton<IClientConnectionStatusService>(services => services.GetService<ClientCommandRuntimeConnectionService>() ?? throw new NullReferenceException());
             services.AddSingleton<IClientCommandConnectionProviderService>(services => services.GetService<ClientCommandRuntimeConnectionService>() ?? throw new NullReferenceException());
             return services;

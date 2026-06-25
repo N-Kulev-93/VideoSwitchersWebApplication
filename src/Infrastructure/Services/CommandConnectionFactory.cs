@@ -1,4 +1,4 @@
-﻿using Application.Command;
+﻿using Application.Command.Domain.Settings;
 using Infrastructure.Connection;
 using Infrastructure.Interface;
 using System;
@@ -9,14 +9,14 @@ namespace Infrastructure.Services
 {
     internal static class CommandConnectionFactory
     {
-        internal static ICommandRuntimeConnection Create(ConnectionConfiguration configuration)
+        internal static ICommunicationSource Create(CommunicationSettings configuration)
         {
             switch (configuration.ConnectionType)
             {
-                case ConnectionType.SerialPort: return new SerialPortConnection(configuration.ToSerialPort());
-                case ConnectionType.Telnet: throw new NotImplementedException();
-                case ConnectionType.Api: throw new NotImplementedException();
-                case ConnectionType.None:
+                case CommunicationType.SerialPort: return new SerialPortConnection(configuration.ToSerialPort());
+                case CommunicationType.Telnet: throw new NotImplementedException();
+                case CommunicationType.Api: throw new NotImplementedException();
+                case CommunicationType.None:
                 default: throw new ArgumentException();
             }
         }

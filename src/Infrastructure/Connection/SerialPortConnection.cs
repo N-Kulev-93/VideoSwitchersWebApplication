@@ -1,4 +1,4 @@
-﻿using Application.Command;
+﻿using Application.Shared.Domain;
 using Infrastructure.Interface;
 using System;
 using System.Collections.Generic;
@@ -6,11 +6,11 @@ using System.Text;
 
 namespace Infrastructure.Connection
 {
-    internal class SerialPortConnection : ICommandRuntimeConnection
+    internal class SerialPortConnection : ICommunicationSource
     {
-        public bool IsOpen => throw new NotImplementedException();
+        public bool IsAlive => throw new NotImplementedException();
 
-        public SerialPortConnection(SerialPortConfiguration configuration)
+        public SerialPortConnection(SerialPortSettings configuration)
         {
             
         }

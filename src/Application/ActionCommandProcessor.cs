@@ -1,5 +1,4 @@
-﻿using Application.Command;
-using Application.Interface;
+﻿using Application.Interface;
 
 namespace Application
 {
@@ -13,7 +12,7 @@ namespace Application
         }
 
 
-        public void Process<TCommand>(TCommand command) where TCommand : ActionCommand
+        public void Process<TCommand>(TCommand command) where TCommand : ICommand
         {
             //TODO: queue here or what ?
 

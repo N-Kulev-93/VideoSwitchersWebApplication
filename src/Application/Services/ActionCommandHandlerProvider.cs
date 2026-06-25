@@ -1,5 +1,4 @@
-﻿using Application.Command;
-using Application.Interface;
+﻿using Application.Interface;
 
 namespace Application.Services
 {
@@ -12,7 +11,7 @@ namespace Application.Services
             _serviceProvider = serviceProvider;    
         }
 
-        public ICommandHandler<TCommand>? Get<TCommand>() where TCommand : ActionCommand
+        public ICommandHandler<TCommand>? Get<TCommand>() where TCommand : ICommand
         {
             var handler =  _serviceProvider.GetService(typeof(ICommandHandler<TCommand>));
             return handler is not null ? (ICommandHandler<TCommand>)handler : null;

@@ -1,4 +1,5 @@
-﻿using Application.Shared.Domain;
+﻿using Application.Command.Rules;
+using Application.Shared;
 
 namespace Application.Command
 {
@@ -7,21 +8,25 @@ namespace Application.Command
         public string Name { get; private set; } 
         public ICollection<VideoInput> Inputs { get; private set; }
         public ICollection<VideoOutput> Outputs { get; private set; }
-        public ICollection<ActionConfiguration> ActionConfigurations { get; private set; } 
-        public ConnectionConfiguration ConnectionConfiguration { get; private set; } 
-        public bool IsOnline { get; set; }
-
+        public SwitcherSettings Settings { get; private set; }
+        public bool IsOnline { get; private set; }
 
         public DomainResult Rename(string name)
         {
             this.Name = name;
 
-            return new DomainResult(maxErrorCapacity: 0);
+            return DomainResult.Success;
         }
 
         public DomainResult RenameInput(int position, string name)
         {
             var result = new DomainResult(maxErrorCapacity: 2);
+
+            if (!new NameIsNotExistInVideoSwitcherInputs(name).IsSatisfiedBy(this))
+                result.AddErrorMessage("Input name already in use.");
+
+            if (!new VideoSwitcherInputPositionInRange(position).IsSatisfiedBy(this))
+                result.AddErrorMessage("Input position out of range.");
 
             if (result.IsFailure) return result;
 
@@ -33,44 +38,38 @@ namespace Application.Command
 
         public DomainResult RenameOutput(int position, string name)
         {
-
             var result = new DomainResult(maxErrorCapacity: 2);
+            
+            if (!new NameIsNotExistInVideoSwitcherOutputs(name).IsSatisfiedBy(this))
+                result.AddErrorMessage("Output name already in use.");
+
+            if (!new VideoSwitcherOutputPositionInRange(position).IsSatisfiedBy(this))
+                result.AddErrorMessage("Output position out of range.");
 
             if (result.IsFailure) return result;
 
             var output = Outputs.Single(output => output.Position.Equals(position));
-
             output.Name = name;
 
             return result;
         }
 
-        public DomainResult SwitchVideoInput(int inputPosition, int outputPosition)
+        public DomainResult SetOutputSourceInput(int inputPosition, int outputPosition)
         {
             var result = new DomainResult(maxErrorCapacity: 2);
+
+            if (!new VideoSwitcherInputPositionInRange(inputPosition).IsSatisfiedBy(this)) 
+                result.AddErrorMessage("Input position out of range.");
+
+            if (!new VideoSwitcherOutputPositionInRange(outputPosition).IsSatisfiedBy(this))
+                result.AddErrorMessage("Output position out of range.");
 
             if (result.IsFailure) return result;
 
             var output = Outputs.Single(output => output.Position.Equals(outputPosition));
-
             output.InputPosition = inputPosition;
-            //TODO: DbContext persist. Runtime execute if configured as switcher command with template.
            
             return result;
-        }
-
-        public DomainResult ConfigureConnection(ConnectionConfiguration configuration)
-        {
-            var result = new DomainResult(maxErrorCapacity: 1);
-
-            //TODO:
-            return result;
-        }
-
-        public DomainResult ConfigureAction()
-        {
-            //TODO: DbContext persist.
-            return new DomainResult(maxErrorCapacity: 2);
         }
     }
 }

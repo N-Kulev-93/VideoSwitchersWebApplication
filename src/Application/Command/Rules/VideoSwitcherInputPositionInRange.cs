@@ -1,18 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text;
+﻿using System.Linq.Expressions;
 
-namespace Application.Command.Rules
+namespace Application.Command
 {
-    internal class VideoSwitcherOutputPositionInRange(int position) : Specification<VideoSwitcher>
-    {
-        public override Expression<Func<VideoSwitcher, bool>> ToExpression()
-        {
-            return switcher => position > 0 && position <= switcher.Outputs.Count;
-        }
-    }
-
     internal class VideoSwitcherInputPositionInRange(int position) : Specification<VideoSwitcher>
     {
         public override Expression<Func<VideoSwitcher, bool>> ToExpression()

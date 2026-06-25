@@ -1,5 +1,6 @@
 ﻿using Application.Command;
 using Application.Interface;
+using Application.Shared.Domain;
 using Infrastructure.Database;
 using Infrastructure.Interface;
 
@@ -15,7 +16,7 @@ namespace Infrastructure.Services
     /// </summary>
     internal class SwitcherUnitOfWork : ISwitcherUnitOfWork, IDisposable
     {
-        readonly ISwitcherWriter _writer;
+        readonly IWriter _writer;
         readonly IClientCommandConnectionProviderService _connectionProvider;
 
         /// <summary>
@@ -26,7 +27,7 @@ namespace Infrastructure.Services
         /// </summary>
         /// <param name="writer"></param>
         /// <param name="connectionProvider"></param>
-        public SwitcherUnitOfWork(ISwitcherWriter writer, IClientCommandConnectionProviderService connectionProvider)
+        public SwitcherUnitOfWork(IWriter writer, IClientCommandConnectionProviderService connectionProvider)
         {
             _writer = writer;
             _connectionProvider = connectionProvider;

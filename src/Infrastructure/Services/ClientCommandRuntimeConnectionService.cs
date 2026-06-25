@@ -1,7 +1,7 @@
 ﻿
 using Infrastructure.Interface;
 using System.Collections.Concurrent;
-using Application.Shared;
+using Application.Interface;
 
 namespace Infrastructure.Services
 {
@@ -9,24 +9,25 @@ namespace Infrastructure.Services
     internal class ClientConnectionStorage
     {
 
-        readonly ConcurrentDictionary<int, ICommandRuntimeConnection> _map;
+
+        readonly ConcurrentDictionary<int, ICommunicationSource> _map;
 
         public ClientConnectionStorage()
         {
-            _map = new ConcurrentDictionary<int, ICommandRuntimeConnection>();
+            _map = new ConcurrentDictionary<int, ICommunicationSource>();
         }
 
-        public ICommandRuntimeConnection? Get(int clientId)
+        public ICommunicationSource? Get(int clientId)
         {
             return _map.GetValueOrDefault(clientId);
         }
 
-        public void Add(int clientId, ICommandRuntimeConnection connection)
+        public void Add(int clientId, ICommunicationSource connection)
         {
             _map.TryAdd(clientId, connection);
         }
 
-        public ICommandRuntimeConnection? Remove(int clientId)
+        public ICommunicationSource? Remove(int clientId)
         {
             return _map.Remove(clientId, out var removed) ? removed : null;
         }

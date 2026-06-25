@@ -28,5 +28,7 @@
             // TODO: Check if better to have sepparate method for printing result.
             return $"Error count: {_errorMessages.Count}. Messages:{Environment.NewLine} {string.Join(Environment.NewLine, _errorMessages)}";
         }
+
+        public static DomainResult Success { get; } = new DomainResult(maxErrorCapacity: null);
     }
 }
